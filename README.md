@@ -9,6 +9,6 @@ That's a study of Particle Swarm Optmization algorithm. I used the framework P5j
 
 ## Instructions
 1. Yes, you realy need to setup a server (like wamp, xamp, etc...);
-2. Change parameters in a file called "newPSO.js" in "js" folder(./js/);
+2. Change parameters in a file named "newPSO.js" in "js" folder(./js/);
 3. Be carefull! Try to reduce the number of particles. You don't want to burn your machine;
 4. Be Happy!
