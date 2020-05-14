@@ -1,7 +1,7 @@
 function setup() {
     createCanvas(windowWidth, windowHeight, WEBGL);
-    sizeParticle = 2;
-    velRandom = 0.2;
+    sizeParticle = 5;
+    velRandom = 5;
     totParticles = 100;
     position = createVector(0, 0, 0);
     target = createVector(0, 0, 0);
@@ -17,20 +17,21 @@ function setup() {
     console.log("> [setup] configuration done!");
     console.log(`> [setup] initial setup: size particle: ${sizeParticle} | velRandom: -${velRandom} and ${velRandom}`);
 }
-
 function draw() {
     try {
         background(51);
         countBox();
         targetRef();
 
-        system.run();
-
-        if (iterations <= 1000) {
+        
+        if (iterations <= 10000) {
+            system.run();
             console.log(`> [runner] interation #${iterations}`);
             iterations++;
         } else {
-            console.log("> [runner] interation limit reached!");
+            console.log("> [runner] interation limit reached! Restarting!");
+            system = new ParticlesSystem(position, target, totParticles);
+            system.run();
         }
         orbitControl();
         normalMaterial();
@@ -39,7 +40,6 @@ function draw() {
     }
 
 }
-
 function countBox() {
     push();
     translate(width / 2 - 100, -height / 2 + 50, 0); //moves our drawing origin to the top left corner
@@ -49,7 +49,6 @@ function countBox() {
     box(10, 10, 10, 1, 1);
     pop();
 }
-
 function targetRef() {
     push();
     translate(target); //moves our drawing origin to the top left corner
@@ -158,7 +157,7 @@ class ParticlesSystem {
             let particle = this.particles[i][0];
             
             //let adjust = random(-0.2, 0.2);
-            let adjust = 0.02;
+            let adjust = 0.2;
             
             // Comparando a posição atual com pbest
             if (particle.position.x <= pbest[1].x) {
